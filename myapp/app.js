@@ -22,6 +22,7 @@ app.get('/sum/:num', function (req,res){
   data.count=req.params.num;
   res.render('my_first_ejs',data);
 });
+
 app.listen(3003, function(){
   console.log('3003 port server on!');
 });
