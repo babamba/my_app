@@ -3,7 +3,7 @@ var path = require('path');
 var app = express();
 var mongoose = require('mongoose');
 
-mongoose.connect("mongodb://test:test@ds013162.mlab.com:13162/babamba");
+mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
 db.once("open", function(){
   console.log("DB connected!");
@@ -36,7 +36,7 @@ app.get('/', function(req,res){
   Data.findOne({name:"myData"}, function(err,data){
     if(err) return console.log("Data ERROR:", err);
     data.count++;
-    dta.save(function (err){
+    data.save(function (err){
       if(err)return console.log("Data ERROR:",err);
       res.render("my_first_ejs",data);
     });
