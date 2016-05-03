@@ -33,9 +33,9 @@ app.use(bodyParser.json());
 
 // set routes
 app.get('/posts', function(req,res){
-  Post.find({}, function (err,posts) {
+  Post.find({}).sort('-createdAt').exec(function (err,posts) {
     if(err) return res.json({success:false, message:err});
-    res.json({success:true, data:posts});
+    res.render("posts/index", {data:posts});
   });
 }); // index
 app.post('/posts', function(req,res){
