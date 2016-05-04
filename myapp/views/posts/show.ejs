@@ -1,0 +1,20 @@
+<<!-- main start -->
+<!-- view / posts / show.ejs -->
+<div class="show">
+  <h3><%= data.title %></h3>
+    <%= data.createdAt.toLocalDateString()  %><br>
+    <%= data.createdAt.toLocalTimeString()  %>
+</div>
+<% if(data.updatedAt) { %>
+  <div class="time">Updated at <br>
+    <%= data.createdAt.toLocalDateString()  %><br>
+    <%= data.createdAt.toLocalTimeString()  %>
+  </div>
+  <% } %>
+  <p class ="body"><%= data.body %><p>
+    <div class = "tools">
+      <a href="/posts/<%=data._id%>/edit"><button>Edit</button></a>
+      <!-- Delete Button here -->
+    </div>
+    <a href="/posts"><button>Back</button></a>
+  </div>
