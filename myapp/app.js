@@ -1,9 +1,10 @@
 // import Moudules
 var express = require('express');
-var path = require('path');
 var app = express();
+var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var methodOverride = require("method-override");
 
 //connect database
 mongoose.connect(process.env.MONGO_DB);
@@ -30,6 +31,8 @@ app.set("view engine", 'ejs');
 // set middlewares
 app.use(express.static(path.join(__dirname, 'public' )));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride("_method"));
 
 // set routes
 app.get('/posts', function(req,res){
@@ -38,10 +41,13 @@ app.get('/posts', function(req,res){
     res.render("posts/index", {data:posts});
   });
 }); // index
+app.get('/posts/new', function(req,res){
+  res.render("posts/new");
+}); //new
 app.post('/posts', function(req,res){
   Post.create(req.body.post,function (err,post) {
     if(err) return res.json({success:false, message:err});
-    res.json({success:true, data:post});
+    res.redirect('/posts');
   });
 }); // create
 app.get('/posts/:id', function(req,res){
@@ -60,13 +66,11 @@ app.put('/posts/:id', function(req,res){
 app.delete('/posts/:id', function(req,res){
   Post.findByIdAndRemove(req.params.id, function (err,post) {
     if(err) return res.json({success:false, message:err});
-    res.json({success:true, message:post._id+" deleted"});
+    res.redirect('/posts');
   });
 }); //destroy
 
 //start server
-
-
 app.listen(3003, function(){
   console.log('3003 port server on!');
 });
