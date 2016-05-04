@@ -11,9 +11,9 @@
     <% include partials/top %>
 <!-- main start-->
 
-<!-- views/posts/show.ejs -->
+<!-- views/posts/index.ejs -->
 <div class="new">
-  <h3>New post</h3>
+  <h3>New Post</h3>
   <form class="posts_form" action="/posts" method="post">
     <label>Title</label>
     <input type="text" name="post[title]" value="">
@@ -21,7 +21,9 @@
     <textarea name="post[body]"></textarea>
     <button type="submit">Submit</button>
   </form>
-  <a href="/post"><button>Back</button></a>
+  <a href="/posts"><button>Back</button><a>
+</div>
+
 <!-- main end -->
     </div><!--posts end -->
     <footer>
