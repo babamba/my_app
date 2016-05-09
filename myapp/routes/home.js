@@ -3,7 +3,6 @@ var router   = express.Router();
 var mongoose = require('mongoose');
 var passport = require('../config/passport.js');
 
-// set home routes
 router.get('/', function (req,res) {
   res.redirect('/posts');
 });
@@ -26,8 +25,9 @@ router.post('/login',
     failureFlash : true
   })
 );
-router.routerget('/logout', function(req, res) {
+router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
+
 module.exports = router;

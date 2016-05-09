@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt = require("bcrypt-nodejs");
+var bcrypt   = require("bcrypt-nodejs");
 
 var userSchema = mongoose.Schema({
   email: {type:String, required:true, unique:true},
@@ -22,4 +22,4 @@ userSchema.methods.authenticate = function (password) {
 };
 var User = mongoose.model('user',userSchema);
 
-modules.exports = User;
+module.exports = User;

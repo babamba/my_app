@@ -1,4 +1,3 @@
-// import modules
 var express  = require('express');
 var app      = express();
 var path     = require('path');
@@ -8,7 +7,7 @@ var flash    = require('connect-flash');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 
-// connect database
+// database
 mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
 db.once("open",function () {
@@ -18,16 +17,21 @@ db.on("error",function (err) {
   console.log("DB ERROR :", err);
 });
 
-// view setting
+// view engine
 app.set("view engine", 'ejs');
 
-// set middlewares
+// middlewares
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.use(session({secret:'MySecret'}));
+
+// passport
+var passport = require('./config/passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 // routes
 app.use('/', require('./routes/home'));
