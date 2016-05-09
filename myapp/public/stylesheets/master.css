@@ -57,9 +57,6 @@ footer{
   width: 90px;
   float:right;
 }
-.post .index footer{
-  background-color: tomato;
-}
 .posts .index ul li:nth-child(odd){
   background-color: #75CEF7;
 }
